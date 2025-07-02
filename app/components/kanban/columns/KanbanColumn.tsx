@@ -9,7 +9,7 @@ const tasks = [
   }
 ];
 
-type KanbanColumnProps = {
+interface KanbanColumnProps {
   title: string,
   status: string,
 };

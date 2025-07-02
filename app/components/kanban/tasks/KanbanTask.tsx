@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-type KanbanTaskProps = {
+interface KanbanTaskProps {
   title: string,
   description: string,
   status: string,
