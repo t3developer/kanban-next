@@ -1,4 +1,4 @@
-import KanbanColumns from "./columns/KanbanColumns";
+import KanbanColumns from "./columns/kanban-columns";
 
 const Kanban = () => {
   return (
