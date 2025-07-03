@@ -16,7 +16,7 @@ type TaskState = {
 }
 
 type TaskActions = {
-  addTask: (title: string, description?: string) => void,
+  addTask: (title: string, status: string, description?: string) => void,
   updateTask: (id: string, status: string) => void,
   deleteTask: (id: string) => void
 }
@@ -31,11 +31,11 @@ export const createTaskSlice: StateCreator<
 > = (set) => ({
   tasks: [],
 
-  addTask: (title: string, description?: string) =>
+  addTask: (title: string, status: string, description?: string) =>
     set(state => ({
       tasks: [
         ...state.tasks,
-        { id: uuid(), title, description, status: 'to_do',  createdAt: new Date(), updatedAt: new Date() }
+        { id: uuid(), title, description, status: status,  createdAt: new Date(), updatedAt: new Date() }
       ]
     })),
   

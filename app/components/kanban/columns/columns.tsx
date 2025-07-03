@@ -7,7 +7,7 @@ const KanbanColumns = () => {
   const columns = useKanbanStore(state => state.columns);
 
   return (
-    <section className='w-full h-full flex gap-6 lg:gap-12'>
+    <section className='w-full h-full flex gap-4 lg:gap-8'>
       {columns.map(column => (
         <KanbanColumn
           key={column.id}

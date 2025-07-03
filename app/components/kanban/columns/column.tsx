@@ -1,15 +1,8 @@
 'use client';
+import { useKanbanStore } from "@/lib/store/kanban-store";
 import KanbanTask from "../tasks/task";
+import KanbanTaskAdd from "../tasks/task-add";
 import KanbanColumnHeader from "./column-header";
-
-const tasks = [
-  {
-    id: '1234',
-    title: 'Our first task',
-    description: 'Some description',
-    status: 'completed'
-  }
-];
 
 export interface KanbanColumnProps {
   columnId: string,
@@ -20,6 +13,8 @@ export interface KanbanColumnProps {
 
 const KanbanColumn = (props: KanbanColumnProps) => {
   const { type  } = props;
+  const tasks = useKanbanStore(state => state.tasks);
+  const addTask = useKanbanStore(state => state.addTask);
   const filteredTasks = tasks.filter(task => task.status === type);
 
   return (
@@ -30,6 +25,7 @@ const KanbanColumn = (props: KanbanColumnProps) => {
           {filteredTasks.map(task => (
             <KanbanTask key={task.id} {...task} />
           ))}
+          <KanbanTaskAdd status={type} addTask={addTask} />
       </div>
     </section>
   );

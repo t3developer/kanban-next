@@ -1,8 +1,11 @@
 
 interface KanbanTaskProps {
+  id: string,
   title: string,
-  description: string,
+  description?: string,
   status: string,
+  createdAt: Date,
+  updatedAt: Date
 }
 
 const KanbanTask = ({ title, description, status }: KanbanTaskProps) => {
