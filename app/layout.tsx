@@ -17,7 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        {children}
+        <header>
+          <nav className="h-12 w-full border-b-1 border-gray-200 shadow-sm shadow-gray-300/50"></nav>
+        </header>
+        <main>{children}</main>
       </body>
     </html>
   );

@@ -1,4 +1,6 @@
-import KanbanTask from "../tasks/kanban-task";
+'use client';
+import KanbanTask from "../tasks/task";
+import KanbanColumnHeader from "./column-header";
 
 const tasks = [
   {
@@ -9,19 +11,22 @@ const tasks = [
   }
 ];
 
-interface KanbanColumnProps {
+export interface KanbanColumnProps {
+  columnId: string,
   label: string,
   type: string,
+  columnIndex: number
 };
 
-const KanbanColumn = ({ label, type  }: KanbanColumnProps) => {
+const KanbanColumn = (props: KanbanColumnProps) => {
+  const { type  } = props;
   const filteredTasks = tasks.filter(task => task.status === type);
 
   return (
     <section className='flex-1 flex flex-col'>
-      <h2 className='ml-1 font-serif text-2xl font-semibold'>{label}</h2>
+      <KanbanColumnHeader {...props} />
 
-      <div className='h-full w-full flex-1 self-stretch flex flex-col gap-4 pt-3'>
+      <div className='h-full w-full flex-1 self-stretch flex flex-col gap-4 pt-5'>
           {filteredTasks.map(task => (
             <KanbanTask key={task.id} {...task} />
           ))}

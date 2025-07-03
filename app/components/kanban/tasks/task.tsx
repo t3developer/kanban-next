@@ -1,4 +1,3 @@
-import classNames from "classnames";
 
 interface KanbanTaskProps {
   title: string,
@@ -9,14 +8,7 @@ interface KanbanTaskProps {
 const KanbanTask = ({ title, description, status }: KanbanTaskProps) => {
   return (
     <div
-      className={classNames(
-        'flex cursor-move items-start justify-between rounded-lg bg-white px-3 py-2 text-gray-900',
-        {
-          'border-2 border-sky-500': status === 'TODO',
-          'border-2 border-amber-500': status === 'IN_PROGRESS',
-          'border-2 border-emerald-500': status === 'DONE'
-        }
-      )}
+      className={'flex cursor-move items-start justify-between rounded-md bg-white border-1 p-4 border-gray-200 shadow-md shadow-gray-300/50'}
     >
       <div>
         <h3 className='font-medium text-gray-700'>{title}</h3>

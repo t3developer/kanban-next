@@ -1,12 +1,12 @@
 import { StateCreator } from "zustand";
 import { KanbanStore } from "../kanban-store";
 import { v4 as uuid } from "uuid";
+import { basicColumns } from "@/lib/data/columns";
 
-type Column = {
+export type Column = {
   id: string,
   label: string,
-  type: string,
-  order: number
+  type: string
 }
 
 type ColumnState = {
@@ -14,17 +14,12 @@ type ColumnState = {
 }
 
 type ColumnActions = {
-  addColumn: (label: string, order: number) => void,
-  deleteColumn: (id: string) => void
+  addColumn: (label: string, index: number) => void,
+  deleteColumn: (id: string) => void,
+  renameColumn: (id: string, label: string) => void
 }
 
 export type ColumnSlice = ColumnState & ColumnActions;
-
-const defaultColumns: Column[] = [
-  { id: uuid(), label: 'To Do', type: 'to_do', order: 1 },
-  { id: uuid(), label: 'In Progress', type: 'in_process', order: 2 },
-  { id: uuid(), label: 'Completed', type: 'completed', order: 3 },
-];
 
 export const createColumnSlice: StateCreator<
   KanbanStore,
@@ -32,18 +27,26 @@ export const createColumnSlice: StateCreator<
   [],
   ColumnSlice
 > = (set) => ({
-  columns: defaultColumns,
+  columns: basicColumns,
   
-  addColumn: (label: string, order: number) =>
+  addColumn: (label: string, index: number) =>
     set(state => ({
-      columns: [
-        ...state.columns,
-        { id: uuid(), label, type: label.replaceAll(' ', '_').toLowerCase(), order }
-      ]
+      columns: state.columns.toSpliced(index + 1, 0, {
+        id: uuid(),
+        label,
+        type: label.replaceAll(' ', '_').toLowerCase(),
+      })
     })),
 
   deleteColumn: (id: string) =>
     set(state => ({
       columns: state.columns.filter(column => column.id !== id)
+    })),
+
+  renameColumn: (id: string, label: string) =>
+    set(state => ({
+      columns: state.columns.map(
+        column => column.id === id ? {...column, label} : column
+      )
     }))
 });
