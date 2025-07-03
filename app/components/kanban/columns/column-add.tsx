@@ -34,7 +34,7 @@ const KanbanColumnAdd = ({ type, columnIndex, addColumn }: KanbanColumnAddProps)
             <Popover.Content className="kanban-card w-3xs mt-3">
               <div className="">
                 <div className="uppercase mb-3">New Column</div>
-                <div className="text-gray-400 mb-1">Name</div>
+                <div className="text-gray-400 mb-1">Label</div>
                 <div className="mb-5">
                   <input type="text" name="new-col-label" className="kanban-input" onChange={e => setNewColName(e.currentTarget.value)} />
                 </div>

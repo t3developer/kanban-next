@@ -17,7 +17,7 @@ body {
 
 @layer {
   .kanban-card {
-    @apply py-5 px-5 rounded-md bg-white border-1 border-gray-200 shadow-md shadow-gray-300/50;
+    @apply py-3 px-4 rounded-md bg-white border-1 border-gray-200 shadow-md shadow-gray-300/50;
   }
   .kanban-input {
     @apply p-2 rounded-md w-full border-1 border-gray-200 shadow-sm shadow-gray-200/50 focus:outline-0 text-sm font-medium;
@@ -27,5 +27,8 @@ body {
   }
   .kanban-button-alert {
     @apply bg-red-400 rounded-md py-1 px-3 cursor-pointer text-white font-semibold  hover:shadow-md hover:shadow-gray-300/100;
+  }
+  .kanban-hover {
+    @apply hover:ring-offset-1 hover:ring-1 hover:ring-blue-200 hover:ring-offset-blue-400
   }
 }

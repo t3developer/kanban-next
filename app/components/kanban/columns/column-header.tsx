@@ -35,7 +35,7 @@ const KanbanColumnHeader = (props: KanbanColumnProps) => {
       <input
         type="text"
         name="column-label"
-        className="uppercase w-full focus:outline-0"
+        className="uppercase w-full font-medium focus:outline-0"
         defaultValue={label}
         onChange={e => setNewColName(e.currentTarget.value)}
       />

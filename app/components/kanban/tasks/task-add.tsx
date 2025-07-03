@@ -32,7 +32,7 @@ const KanbanTaskAdd = ({ status, addTask }: KanbanTaskAddProps) => {
         </AlertDialog.Trigger>
         <AlertDialog.Portal>
           <AlertDialog.Overlay className="fixed inset-0 bg-gray-300/50 data-[state=open]:animate-overlayShow" />
-          <AlertDialog.Content className="fixed w-sm kanban-card left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md bg-gray1 shadow-[var(--shadow-6)] focus:outline-none data-[state=open]:animate-contentShow">
+          <AlertDialog.Content className="fixed w-sm kanban-card left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <AlertDialog.Title className="m-0 text-[17px] font-medium text-mauve12">
               New Task
             </AlertDialog.Title>
