@@ -22,6 +22,9 @@ body {
   .kanban-input {
     @apply p-2 rounded-md w-full border-1 border-gray-200 shadow-sm shadow-gray-200/50 focus:outline-0 text-sm font-medium;
   }
+  .kanban-input-borderless {
+    @apply w-100 border-0 focus:outline-0;
+  }
   .kanban-button {
     @apply bg-cyan-500 rounded-md py-1 px-3 cursor-pointer text-white font-semibold  hover:shadow-md hover:shadow-gray-300/100;
   }

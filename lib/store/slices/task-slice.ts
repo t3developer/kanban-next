@@ -17,7 +17,7 @@ type TaskState = {
 
 type TaskActions = {
   addTask: (title: string, status: string, description?: string) => void,
-  updateTask: (id: string, status: string) => void,
+  updateTask: (id: string, status: string, title?: string, description?: string) => void,
   deleteTask: (id: string) => void
 }
 
@@ -35,7 +35,13 @@ export const createTaskSlice: StateCreator<
     set(state => ({
       tasks: [
         ...state.tasks,
-        { id: uuid(), title, description, status: status,  createdAt: new Date(), updatedAt: new Date() }
+        {
+          id: uuid(),
+          title, description,
+          status: status, 
+          createdAt: new Date(),
+          updatedAt: new Date() 
+        }
       ]
     })),
   
@@ -44,10 +50,16 @@ export const createTaskSlice: StateCreator<
       tasks: state.tasks.filter(task => task.id !== id)
     })),
   
-  updateTask: (id: string, status: string) =>
+  updateTask: (id: string, status: string, title?: string, description?: string) =>
     set(state => ({
       tasks: state.tasks.map(task =>
-        task.id === id ? { ...task, status } : task
+        task.id === id ? {
+          ...task,
+          status,
+          title: title || task.title,
+          description: description || task.description,
+          updatedAt: new Date()
+        } : task
       )
     }))
 });

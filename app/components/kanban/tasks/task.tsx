@@ -1,7 +1,11 @@
-import TimeAgo from "react-timeago";
+'use client';
+import { useState } from "react";
+import KanbanTaskCard from "./task-card";
+import { Dialog, VisuallyHidden } from "radix-ui";
+import KanbanTaskUpdate from "./task-update";
+import { useKanbanStore } from "@/lib/store/kanban-store";
 
-
-interface KanbanTaskProps {
+export interface KanbanTaskProps {
   id: string,
   title: string,
   description?: string,
@@ -10,20 +14,33 @@ interface KanbanTaskProps {
   updatedAt: Date
 }
 
-const KanbanTask = ({ title, description, updatedAt }: KanbanTaskProps) => {
+const KanbanTask = (props: KanbanTaskProps) => {
+  const [ openModal, setOpenModal ] = useState<boolean>(false);
+  const updateTask = useKanbanStore(state => state.updateTask);
+  const deleteTask = useKanbanStore(state => state.deleteTask);
+
   return (
-    <div
-      className={'h-30 flex flex-col cursor-pointer items-start justify-between gap-3 kanban-card kanban-hover'}
-    >
-      <div>
-        <h3 className='font-medium text-gray-700'>{title}</h3>
-        <p className='text-sm font-light text-gray-500 mt-1 line-clamp-2 h-10'>{description}</p>
-      </div>
-      <div className="flex justify-between border-t-1 border-gray-100 py-1 w-full text-xs text-gray-300">
-        <p>Last Edited At:</p>
-        <TimeAgo date={updatedAt} />
-      </div>
-    </div>
+    <>
+      <Dialog.Root open={openModal} onOpenChange={setOpenModal}>
+        <Dialog.Trigger>
+          <KanbanTaskCard {...props} />
+        </Dialog.Trigger>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 bg-gray-300/50 data-[state=open]:animate-overlayShow" />
+          <Dialog.Content className="fixed w-md kanban-card left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <VisuallyHidden.Root>
+            <Dialog.Title>Task Update</Dialog.Title>
+          </VisuallyHidden.Root>
+          <KanbanTaskUpdate
+            {...props}
+            setOpenModal={setOpenModal}
+            updateTask={updateTask}
+            deleteTask={deleteTask}
+          />
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+    </>
   );
 };
 
