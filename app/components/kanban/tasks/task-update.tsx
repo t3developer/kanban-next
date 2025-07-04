@@ -10,7 +10,7 @@ import { Task } from '@/lib/stores/kanban/types';
 interface KanbanTaskUpdateProps extends KanbanTaskProps {
   setOpenModal: (x: boolean) => void,
   updateTask: (columnId: string, updatedTask: Task) => void,
-  removeTask: (id: string) => void
+  removeTask: (columnId: string, taskId: string) => void
 }
 
 const KanbanTaskUpdate = (props: KanbanTaskUpdateProps) => {
