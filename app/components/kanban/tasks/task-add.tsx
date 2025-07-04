@@ -3,19 +3,19 @@ import React, { FormEvent, useState } from 'react'
 import { FiPlus } from 'react-icons/fi';
 
 interface KanbanTaskAddProps {
-  status: string,
+  columnId: string,
   addTask: (title: string, status: string, description?: string) => void
 }
 
-const KanbanTaskAdd = ({ status, addTask }: KanbanTaskAddProps) => {
+const KanbanTaskAdd = ({ columnId, addTask }: KanbanTaskAddProps) => {
   const [ dialogOpen, setDialogOpen ] = useState<boolean>(false);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     addTask(
+      columnId,
       data.get('taskTitle') as string,
-      status,
       data.get('taskDesc') as string
     );
     setDialogOpen(false);

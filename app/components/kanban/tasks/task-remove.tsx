@@ -4,10 +4,11 @@ import { RiDeleteBinLine } from 'react-icons/ri'
 
 interface KanbanTaskRemoveProps {
   taskId: string,
-  deleteTask: (id: string) => void
+  columnId: string,
+  removeTask: (columnId: string, taskId: string) => void
 }
 
-const KanbanTaskRemove = ({ taskId, deleteTask }: KanbanTaskRemoveProps) => {
+const KanbanTaskRemove = ({ taskId, columnId, removeTask }: KanbanTaskRemoveProps) => {
   return (
       <>
         <AlertDialog.Root>
@@ -25,7 +26,7 @@ const KanbanTaskRemove = ({ taskId, deleteTask }: KanbanTaskRemoveProps) => {
               <AlertDialog.Action asChild>
                   <div className="flex justify-between mt-5">
                     <AlertDialog.Cancel className="text-sm text-gray-500 cursor-pointer outline-0">Cancel</AlertDialog.Cancel>
-                    <button className="kanban-button-alert" onClick={() => deleteTask(taskId)}>Delete</button>
+                    <button className="kanban-button-alert" onClick={() => removeTask(columnId, taskId)}>Delete</button>
                 </div>
               </AlertDialog.Action>
             </AlertDialog.Content>

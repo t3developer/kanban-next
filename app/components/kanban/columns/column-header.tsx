@@ -1,6 +1,6 @@
 'use client';
 
-import { useKanbanStore } from "@/lib/store/kanban-store";
+import { useKanbanStore } from "@/lib/stores/kanban/store";
 import classnames from "classnames";
 import { KanbanColumnProps } from "./column";
 import { useState } from "react";
@@ -10,10 +10,10 @@ import KanbanColumnRemove from "./column-remove";
 import KanbanColumnAdd from "./column-add";
 
 const KanbanColumnHeader = (props: KanbanColumnProps) => {
-  const { columnId, label, type, columnIndex } = props;
+  const { column: { type, id: columnId, label }, columnIndex } = props;
   const [ newColName, setNewColName ] = useState<string>(label);
   const renameColumn = useKanbanStore(state => state.renameColumn);
-  const deleteColumn = useKanbanStore(state => state.deleteColumn);
+  const deleteColumn = useKanbanStore(state => state.removeColumn);
   const addColumn = useKanbanStore(state => state.addColumn);
 
   const canRename = newColName !== '' && label !== newColName;

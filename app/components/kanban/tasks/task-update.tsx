@@ -4,27 +4,31 @@ import { KanbanTaskProps } from './task';
 import { FormEvent } from 'react';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import KanbanTaskRemove from './task-remove';
-import { FaChevronDown } from 'react-icons/fa';
-import { useKanbanStore } from '@/lib/store/kanban-store';
+import { useKanbanStore } from '@/lib/stores/kanban/store';
+import { Task } from '@/lib/stores/kanban/types';
 
 interface KanbanTaskUpdateProps extends KanbanTaskProps {
   setOpenModal: (x: boolean) => void,
-  updateTask: (id: string, status: string, title?: string, description?: string) => void,
-  deleteTask: (id: string) => void
+  updateTask: (columnId: string, updatedTask: Task) => void,
+  removeTask: (id: string) => void
 }
 
 const KanbanTaskUpdate = (props: KanbanTaskUpdateProps) => {
-  const { id: taskId, title, status, description, setOpenModal, deleteTask, updateTask } = props;
+  const { task, columnId, setOpenModal, removeTask, updateTask } = props;
+  const { id: taskId, title, status, description } = task;
   const columns = useKanbanStore(state => state.columns);
 
   const onUpdate = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const data = new FormData(e.currentTarget);
       updateTask(
-        taskId,
-        data.get('taskStatus') as string,
-        data.get('taskTitle') as string,
-        data.get('taskDesc') as string
+        columnId,
+        {
+          ...task,
+          title: data.get('taskTitle') as string,
+          description: data.get('taskDesc') as string,
+          status: data.get('taskStatus') as string,
+        } as Task
       );
       setOpenModal(false);
     };
@@ -61,8 +65,9 @@ const KanbanTaskUpdate = (props: KanbanTaskUpdateProps) => {
 
         <div className="flex justify-between items-center mt-10">
             <KanbanTaskRemove
-              deleteTask={deleteTask}
+              removeTask={removeTask}
               taskId={taskId}
+              columnId={columnId}
             />
             <Form.Submit className="kanban-button">
               Update

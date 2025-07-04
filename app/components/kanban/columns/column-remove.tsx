@@ -23,7 +23,7 @@ const KanbanColumnRemove = ({ type, columnId, deleteColumn }: KanbanColumnRemove
                 <AlertDialog.Title className="m-0 text-[17px] font-medium text-mauve12">
                   Are you sure?
                 </AlertDialog.Title>
-                <AlertDialog.Description>Do you want to delete this column?</AlertDialog.Description>
+                <AlertDialog.Description>Do you want to delete this column? All the tasks associated with will be deleted with it.</AlertDialog.Description>
                 
                 <AlertDialog.Action asChild>
                     <div className="flex justify-between mt-5">
