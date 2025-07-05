@@ -6,7 +6,16 @@ export type TaskActions = {
   addTask: (columnId: string, title: string, description?: string) => void,
   updateTask: (columnId: string, updatedTask: Task) => void,
   removeTask: (columnId: string, taskId: string) => void
-}
+};
+
+export type MoveTaskAction = {
+  moveTaskToColumn: (
+    taskId: string,
+    fromColumnId: string,
+    toColumnId: string,
+    insertIndex?: number
+  ) => void;
+};
 
 export const createTaskActions = (
   set: (fn: (state: KanbanStore) => void) => void,
@@ -57,5 +66,30 @@ export const createTaskActions = (
       if (column) {
         column.tasks = column.tasks.filter((task) => task.id !== taskId);
       }
+    }),
+});
+
+export const createMoveTaskAction = (
+  set: (fn: (state: KanbanStore) => void) => void,
+  get: () => { columns: Column[] }
+): MoveTaskAction => ({
+  moveTaskToColumn: (taskId, fromColumnId, toColumnId, insertIndex) =>
+    set((state) => {
+      const fromColumn = state.columns.find((col) => col.id === fromColumnId);
+      const toColumn = state.columns.find((col) => col.id === toColumnId);
+      if (!fromColumn || !toColumn) return;
+
+      const taskIndex = fromColumn.tasks.findIndex((t) => t.id === taskId);
+      const task = fromColumn.tasks[taskIndex];
+      if (!task) return;
+
+      fromColumn.tasks.splice(taskIndex, 1);
+
+      const position = insertIndex ?? toColumn.tasks.length;
+      toColumn.tasks.splice(position, 0, {
+        ...task,
+        status: toColumn.type,
+        updatedAt: new Date(),
+      });
     }),
 });

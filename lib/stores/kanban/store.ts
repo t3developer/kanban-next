@@ -3,7 +3,7 @@ import { immer } from "zustand/middleware/immer";
 import { devtools, persist } from "zustand/middleware";
 import { Column } from './types';
 import { ColumnActions, createColumnActions } from './actions-column';
-import { createTaskActions, TaskActions } from './actions-task';
+import { createMoveTaskAction, createTaskActions, MoveTaskAction, TaskActions } from './actions-task';
 import { CommentActions, createCommentActions } from './actions-comment';
 
 type KanbanState = {
@@ -17,6 +17,7 @@ const initKanbanState: KanbanState = {
 export type KanbanStore = KanbanState &
   ColumnActions &
   TaskActions &
+  MoveTaskAction &
   CommentActions;
 
 export const useKanbanStore = create<KanbanStore>()(
@@ -26,6 +27,7 @@ export const useKanbanStore = create<KanbanStore>()(
         ...initKanbanState,
         ...createColumnActions(set, get),
         ...createTaskActions(set, get),
+        ...createMoveTaskAction(set, get),
         ...createCommentActions(set, get)
       })),
       { name: 'kanban-store' }
