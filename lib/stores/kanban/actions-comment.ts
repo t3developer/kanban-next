@@ -1,5 +1,5 @@
 import { KanbanStore } from "./store";
-import { Column, Comment } from "./types";
+import { Comment } from "./types";
 import { v4 as uuid } from "uuid";
 
 export type CommentActions = {
@@ -9,8 +9,7 @@ export type CommentActions = {
 };
 
 export const createCommentActions = (
-  set: (fn: (state: KanbanStore) => void) => void,
-  get: () => { columns: Column[] }
+  set: (fn: (state: KanbanStore) => void) => void
 ): CommentActions => ({
   addComment: (taskId, comment, user) =>
     set((state) => {

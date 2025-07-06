@@ -81,15 +81,15 @@ const KanbanTaskUpdate = React.memo(function KanbanTaskUpdate(props: KanbanTaskU
           <div className='w-full h-[0.5px] bg-gray-300'></div>
           <div className='text-xs text-right text-gray-400'>
             <p>Created By</p>
-            <p>{task.createdBy}</p>
+            <p>{createdBy}</p>
           </div>
           <div className='text-xs text-right text-gray-400'>
             <p>Created at</p>
-            <p>{new Date(task.createdAt).toLocaleString()}</p>
+            <p>{new Date(createdAt).toLocaleString()}</p>
           </div>
           <div className='text-xs text-right text-gray-400'>
             <p>Last updated at</p>
-            <p>{new Date(task.updatedAt).toLocaleString()}</p>
+            <p>{new Date(updatedAt).toLocaleString()}</p>
           </div>
           <div className='w-full h-[0.5px] bg-gray-300'></div>
           <KanbanTaskRemove

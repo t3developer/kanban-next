@@ -2,10 +2,9 @@
 import React, { useState } from 'react';
 import { useKanbanStore } from '@/lib/stores/kanban/store';
 import { Comment } from '@/lib/stores/kanban/types';
-import { FiEdit2, FiTrash, FiSend } from 'react-icons/fi';
+import { FiEdit2, FiSend } from 'react-icons/fi';
 import { useShallow } from 'zustand/shallow';
 import { ImBin } from 'react-icons/im';
-import KanbanColumn from '../columns/column';
 
 interface KanbanCommentsProps {
   taskId: string;

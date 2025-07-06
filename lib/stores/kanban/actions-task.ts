@@ -1,6 +1,6 @@
 import { KanbanStore } from "./store";
 import { v4 as uuid } from "uuid";
-import { Column, Task } from "./types";
+import { Task } from "./types";
 
 export type TaskActions = {
   addTask: (columnId: string, title: string, user: string, description?: string) => void,
@@ -18,8 +18,7 @@ export type MoveTaskAction = {
 };
 
 export const createTaskActions = (
-  set: (fn: (state: KanbanStore) => void) => void,
-  get: () => { columns: Column[] }
+  set: (fn: (state: KanbanStore) => void) => void
 ): TaskActions => ({
   addTask: (columnId, title, user, description) =>
     set((state) => {
@@ -71,8 +70,7 @@ export const createTaskActions = (
 });
 
 export const createMoveTaskAction = (
-  set: (fn: (state: KanbanStore) => void) => void,
-  get: () => { columns: Column[] }
+  set: (fn: (state: KanbanStore) => void) => void
 ): MoveTaskAction => ({
   /**
    * Moves a task from one column to another (or within the same column).

@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { KanbanStore } from "./store";
-import { Task, Column } from "./types";
+import { Task } from "./types";
 
 
 export type ColumnActions = {
@@ -11,8 +11,7 @@ export type ColumnActions = {
 }
 
 export const createColumnActions = (
-  set: (fn: (state: KanbanStore) => void) => void,
-  get: () => { columns: Column[] }
+  set: (fn: (state: KanbanStore) => void) => void
 ): ColumnActions => ({
   addColumn: (label: string, index: number) =>
     set(state => ({

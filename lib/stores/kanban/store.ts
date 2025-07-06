@@ -25,18 +25,19 @@ export type KanbanStore = KanbanState &
 export const useKanbanStore = create<KanbanStore>()(
   devtools(
     persist(
-      immer((set, get) => ({
+      immer((set) => ({
         ...initKanbanState,
-        ...createColumnActions(set, get),
-        ...createTaskActions(set, get),
-        ...createMoveTaskAction(set, get),
-        ...createCommentActions(set, get)
+        ...createColumnActions(set),
+        ...createTaskActions(set),
+        ...createMoveTaskAction(set),
+        ...createCommentActions(set)
       })),
       {
         name: 'kanban-store',
         partialize: (state) => {
           // Use destructuring to exclude the `user` property
           // we will initialize the user on client side (guest entry per request)
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { user, ...rest } = state;
           return rest;
         },

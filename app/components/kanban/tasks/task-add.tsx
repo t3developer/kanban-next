@@ -1,5 +1,5 @@
 import { AlertDialog, Form } from 'radix-ui';
-import React, { FormEvent, useMemo, useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { FiPlus } from 'react-icons/fi';
 
 interface KanbanTaskAddProps {
