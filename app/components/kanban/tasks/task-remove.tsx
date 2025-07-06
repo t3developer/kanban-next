@@ -1,6 +1,6 @@
 import { AlertDialog } from 'radix-ui'
 import React from 'react'
-import { RiDeleteBinLine } from 'react-icons/ri'
+import { ImBin } from 'react-icons/im'
 
 interface KanbanTaskRemoveProps {
   taskId: string,
@@ -13,7 +13,10 @@ const KanbanTaskRemove = ({ taskId, columnId, removeTask }: KanbanTaskRemoveProp
       <>
         <AlertDialog.Root>
           <AlertDialog.Trigger asChild>
-            <div className="cursor-pointer text-xl text-red-400"><RiDeleteBinLine /></div>
+            <button title="Delete Task" className="flex items-center gap-1 text-sm text-red-400 hover:text-red-700 hover:border-b-1 cursor-pointer">
+              <div><ImBin size={12} /></div>
+              <div>Delete Task</div>
+            </button>
           </AlertDialog.Trigger>
           <AlertDialog.Portal>
             <AlertDialog.Overlay className="fixed inset-0 bg-gray-300/50 data-[state=open]:animate-overlayShow" />

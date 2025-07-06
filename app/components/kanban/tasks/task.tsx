@@ -44,7 +44,7 @@ const KanbanTask = (props: KanbanTaskProps) => {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-gray-300/50 data-[state=open]:animate-overlayShow" />
-        <Dialog.Content className="fixed w-md kanban-card left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <Dialog.Content className="fixed w-2xl kanban-card left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <VisuallyHidden.Root>
             <Dialog.Title>Task Update</Dialog.Title>
           </VisuallyHidden.Root>

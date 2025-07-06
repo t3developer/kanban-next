@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 import { Column, Task } from "./types";
 
 export type TaskActions = {
-  addTask: (columnId: string, title: string, description?: string) => void,
+  addTask: (columnId: string, title: string, user: string, description?: string) => void,
   updateTask: (columnId: string, updatedTask: Task) => void,
   removeTask: (columnId: string, taskId: string) => void
 };
@@ -21,7 +21,7 @@ export const createTaskActions = (
   set: (fn: (state: KanbanStore) => void) => void,
   get: () => { columns: Column[] }
 ): TaskActions => ({
-  addTask: (columnId, title, description) =>
+  addTask: (columnId, title, user, description) =>
     set((state) => {
       const column = state.columns.find((col) => col.id === columnId);
       if (column) {
@@ -32,7 +32,8 @@ export const createTaskActions = (
           status: column.type, 
           createdAt: new Date(),
           updatedAt: new Date(),
-          comments: []
+          comments: [],
+          createdBy: user
         });
       }
     }),

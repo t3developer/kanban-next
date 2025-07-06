@@ -4,12 +4,12 @@ import { FiPlus } from 'react-icons/fi';
 
 interface KanbanTaskAddProps {
   columns: {id: string, label: string, type: string}[],
-  addTask: (title: string, status: string, description?: string) => void
+  user: string,
+  addTask: (title: string, status: string, user: string, description?: string) => void
 }
 
-const KanbanTaskAdd = ({ columns, addTask }: KanbanTaskAddProps) => {
+const KanbanTaskAdd = ({ columns, user, addTask }: KanbanTaskAddProps) => {
   const [ dialogOpen, setDialogOpen ] = useState<boolean>(false);
-  console.log('columns shortened data', columns);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,7 +20,8 @@ const KanbanTaskAdd = ({ columns, addTask }: KanbanTaskAddProps) => {
     addTask(
       columnId!,
       data.get('taskTitle') as string,
-      data.get('taskDesc') as string
+      user,
+      data.get('taskDesc') as string,
     );
     setDialogOpen(false);
   };

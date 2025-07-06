@@ -3,7 +3,7 @@ import { Column, Comment } from "./types";
 import { v4 as uuid } from "uuid";
 
 export type CommentActions = {
-  addComment: (taskId: string, comment: string) => void;
+  addComment: (taskId: string, comment: string, user: string) => void;
   removeComment: (taskId: string, commentId: string) => void;
   updateComment: (taskId: string, updatedComment: Comment) => void;
 };
@@ -12,7 +12,7 @@ export const createCommentActions = (
   set: (fn: (state: KanbanStore) => void) => void,
   get: () => { columns: Column[] }
 ): CommentActions => ({
-  addComment: (taskId, comment) =>
+  addComment: (taskId, comment, user) =>
     set((state) => {
       for (const column of state.columns) {
         const task = column.tasks.find((t) => t.id === taskId);
@@ -21,7 +21,8 @@ export const createCommentActions = (
             id: uuid(),
             comment,
             createdAt: new Date(),
-            updatedAt: new Date()
+            updatedAt: new Date(),
+            createdBy: user
           });
           break;
         }

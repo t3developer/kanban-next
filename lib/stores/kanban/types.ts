@@ -1,9 +1,13 @@
+export type User = {
+  name: string;
+};
 
 export type Comment = {
   id: string,
   comment: string,
   createdAt: Date,
-  updatedAt: Date
+  updatedAt: Date,
+  createdBy: string
 }
 
 export type Task = {
@@ -13,6 +17,7 @@ export type Task = {
   status: string,
   createdAt: Date,
   updatedAt: Date,
+  createdBy: string,
   comments: Comment[]
 }
 

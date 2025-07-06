@@ -28,6 +28,9 @@ body {
   .kanban-button {
     @apply bg-cyan-500 rounded-md py-1 px-3 cursor-pointer text-white font-semibold  hover:shadow-md hover:shadow-gray-300/100;
   }
+  .kanban-button-secondary {
+    @apply bg-zinc-400 rounded-md py-1 px-3 cursor-pointer text-white font-semibold  hover:shadow-md hover:shadow-gray-300/100;
+  }
   .kanban-button-alert {
     @apply bg-red-400 rounded-md py-1 px-3 cursor-pointer text-white font-semibold  hover:shadow-md hover:shadow-gray-300/100;
   }
