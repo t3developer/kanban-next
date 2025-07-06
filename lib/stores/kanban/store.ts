@@ -14,7 +14,7 @@ type KanbanState = {
 
 const initKanbanState: KanbanState = {
   columns: [],
-  user: { name: randomReadableName() }
+  user: { name: '' }
 };
 
 export type KanbanStore = KanbanState &
@@ -33,7 +33,14 @@ export const useKanbanStore = create<KanbanStore>()(
         ...createMoveTaskAction(set, get),
         ...createCommentActions(set, get)
       })),
-      { name: 'kanban-store' }
+      {
+        name: 'kanban-store',
+        partialize: (state) => {
+          // Use destructuring to exclude the `user` property
+          const { user, ...rest } = state;
+          return rest;
+        },
+      },
     ),
     { name: 'KanbanDevtools' }
   )

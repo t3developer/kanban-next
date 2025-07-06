@@ -12,16 +12,16 @@ const Kanban = () => {
   return (
     <>
       <div className="flex-none flex justify-between items-center">
-          <h1>Board</h1>
-          {
-            columns &&
-            <KanbanTaskAdd
-              columns={columns.map(c =>({"id": c.id, "label": c.label, "type": c.type}))}
-              user={user.name}
-              addTask={addTask}
-            />
-          }
-        </div>
+        <h1>Board</h1>
+        {
+          columns &&
+          <KanbanTaskAdd
+            columns={columns.map(c =>({"id": c.id, "label": c.label, "type": c.type}))}
+            user={user.name}
+            addTask={addTask}
+          />
+      }
+      </div>
       <div className="flex-1 flex items-stretch">
         <div className="w-full flex justify-center items-center py-6">
           <KanbanColumns columns={columns} />
