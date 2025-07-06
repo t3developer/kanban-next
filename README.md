@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kanban Next
 
-## Getting Started
+A modern, responsive Kanban board built with Next.js, Zustand, and TailwindCSS.  
+Easily manage your tasks with drag-and-drop columns and cards, persistent state, and a clean, fast UI.
 
-First, run the development server:
+---
+
+## 🚀 Tech Stack
+
+- **Next.js 15** – App Router, React 19, SSR/CSR hybrid
+- **React 19** – Component-based UI
+- **Zustand** (+ Immer middleware) – State management and local storage persistence
+- **TailwindCSS 4** – Utility-first, responsive styling
+- **dnd-kit** – Drag-and-drop for tasks and columns
+- **Radix UI** – Accessible dialogs, popovers, overlays
+- **uuid** – Unique IDs for columns and tasks
+- **react-icons** – Iconography
+- **react-timeago** – Human-readable timestamps
+
+---
+
+## 📝 Features
+
+- **Drag & Drop**: Move tasks between columns with smooth drag-and-drop (powered by dnd-kit).
+- **Persistent Storage**: Your board stays in your browser using Zustand's persist middleware.
+- **Custom Columns**: Add, rename, and remove columns (except core status columns).
+- **Task Management**: Create, update, and delete tasks.
+- **Task Details**: Edit task title, description, status; add comments.
+- **Responsive UI**: Works well on desktop and mobile.
+- **Accessible Components**: Built with Radix UI for dialogs and popovers.
+- **Guest User**: Each session gets a random username for task attribution.
+
+---
+
+## 🖥️ Getting Started
+
+Clone the repo and install dependencies:
+
+```bash
+git clone https://github.com/t3developer/kanban-next.git
+cd kanban-next
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to use your Kanban board.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📁 Project Structure
 
-## Learn More
+```
+app/
+  components/kanban/      # Kanban board, columns, tasks, dialogs
+  globals.css             # Tailwind & global styles
+lib/
+  stores/kanban/          # Zustand store, actions, types
+  data/columns.ts         # Default columns, enums
+...
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Customization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Change default columns**: Edit `lib/data/columns.ts`.
+- **Update styles/theme**: Edit `app/globals.css` (Tailwind + custom classes).
+- **Expand features**: Add fields to `Task`/`Column` types, or extend the Zustand store for new actions.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🙏 Credits
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js](https://nextjs.org/)
+- [Zustand](https://docs.pmnd.rs/zustand)
+- [TailwindCSS](https://tailwindcss.com/)
+- [dnd-kit](https://docs.dndkit.com/)
+- [Radix UI](https://www.radix-ui.com/)
+- [react-icons](https://react-icons.github.io/react-icons/)
+- [uuid](https://www.npmjs.com/package/uuid)
+- [react-timeago](https://www.npmjs.com/package/react-timeago)
+
+---
+
+## 📄 License
+
+MIT
+
+---
