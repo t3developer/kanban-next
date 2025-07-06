@@ -1,10 +1,11 @@
+import React from 'react';
 import TimeAgo from 'react-timeago';
 import { KanbanTaskProps } from './task';
 import { FaCheckCircle } from 'react-icons/fa';
 import { BASIC_COLUMNS } from '@/lib/data/columns';
 import classNames from 'classnames';
 
-const KanbanTaskCard = (props: KanbanTaskProps) => {
+const KanbanTaskCard = React.memo(function KanbanTaskCard(props: KanbanTaskProps) {
   const { title, description, updatedAt, status } = props.task;
   
   return (
@@ -25,6 +26,6 @@ const KanbanTaskCard = (props: KanbanTaskProps) => {
       </div>
     </div>
   )
-}
+});
 
 export default KanbanTaskCard;

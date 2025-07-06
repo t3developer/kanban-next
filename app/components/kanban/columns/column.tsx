@@ -1,6 +1,5 @@
 'use client';
 import React from "react";
-import { useKanbanStore } from "@/lib/stores/kanban/store";
 import KanbanTask from "../tasks/task";
 import KanbanColumnHeader from "./column-header";
 import { Column } from "@/lib/stores/kanban/types";
@@ -11,7 +10,7 @@ export interface KanbanColumnProps {
   columnIndex: number
 };
 
-const KanbanColumn = (props: KanbanColumnProps) => {
+const KanbanColumn = React.memo(function KanbanColumn(props: KanbanColumnProps) {
   const { column: { id: columnId, tasks }  } = props;
 
   const { isOver, setNodeRef } = useDroppable({ id: columnId });
@@ -33,7 +32,10 @@ const KanbanColumn = (props: KanbanColumnProps) => {
             // Empty column drop area
             <div
               ref={setNodeRef}
-              className={`flex-1 rounded bg-zinc-100 flex items-center justify-center text-xs text-gray-400 border-2 border-dashed ${isOver ? "border-cyan-400 bg-cyan-50" : "border-gray-200"}`}
+              className={
+                `flex-1 rounded bg-zinc-100 flex items-center justify-center text-xs text-gray-400 border-2 border-dashed 
+                ${isOver ? "border-cyan-400 bg-cyan-50" : "border-gray-200"}`
+              }
               style={{ minHeight: 60 }}
             >
               Drop task here
@@ -48,6 +50,6 @@ const KanbanColumn = (props: KanbanColumnProps) => {
         </div>
     </section>
   );
-};
+});
 
 export default KanbanColumn;

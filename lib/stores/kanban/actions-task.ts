@@ -74,19 +74,34 @@ export const createMoveTaskAction = (
   set: (fn: (state: KanbanStore) => void) => void,
   get: () => { columns: Column[] }
 ): MoveTaskAction => ({
+  /**
+   * Moves a task from one column to another (or within the same column).
+   *
+   * @param taskId - The ID of the task to move.
+   * @param fromColumnId - The column ID the task is currently in.
+   * @param toColumnId - The column ID the task should move to.
+   * @param insertIndex - (Optional) The index in the destination column to insert the task at.
+   */
   moveTaskToColumn: (taskId, fromColumnId, toColumnId, insertIndex) =>
     set((state) => {
+      // Find the source and destination columns
       const fromColumn = state.columns.find((col) => col.id === fromColumnId);
       const toColumn = state.columns.find((col) => col.id === toColumnId);
       if (!fromColumn || !toColumn) return;
 
+      // Find the task's index in the source column
       const taskIndex = fromColumn.tasks.findIndex((t) => t.id === taskId);
       const task = fromColumn.tasks[taskIndex];
       if (!task) return;
 
+      // Remove the task from the source column 
       fromColumn.tasks.splice(taskIndex, 1);
 
+      // Determine the new position in the destination column
       const position = insertIndex ?? toColumn.tasks.length;
+
+      // Insert the task into the destination column at the specified index.
+      // We also update the status and updatedAt fields.
       toColumn.tasks.splice(position, 0, {
         ...task,
         status: toColumn.type,

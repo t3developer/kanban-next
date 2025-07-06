@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import { Dialog, Form } from 'radix-ui';
 import { KanbanTaskProps } from './task';
 import { FormEvent, useMemo } from 'react';
@@ -14,7 +15,7 @@ interface KanbanTaskUpdateProps extends KanbanTaskProps {
   removeTask: (columnId: string, taskId: string) => void
 }
 
-const KanbanTaskUpdate = (props: KanbanTaskUpdateProps) => {
+const KanbanTaskUpdate = React.memo(function KanbanTaskUpdate(props: KanbanTaskUpdateProps) {
   const { task, columnId, setOpenModal, removeTask, updateTask } = props;
   const { id: taskId, title, status, description, createdAt, createdBy, updatedAt } = task;
 
@@ -106,6 +107,6 @@ const KanbanTaskUpdate = (props: KanbanTaskUpdateProps) => {
       </Dialog.Close>
     </div>
   )
-}
+});
 
-export default KanbanTaskUpdate
+export default KanbanTaskUpdate;

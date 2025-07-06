@@ -1,16 +1,10 @@
 'use client';
+import React from 'react';
 import { useKanbanStore } from '@/lib/stores/kanban/store'
-import { randomReadableName } from '@/lib/utils/random-name';
 import { Avatar } from 'radix-ui';
-import React from 'react'
 
 const Navbar = () => {
   const user = useKanbanStore(state => state.user);
-  const setUserName = useKanbanStore.setState;
-  if (!user.name)
-    setUserName(state => {
-      state.user.name = randomReadableName()
-    });
 
   return ( 
     <nav className="h-12 w-full px-12 flex items-center justify-end gap-3 border-b-1 border-gray-200 shadow-sm shadow-gray-300/50">

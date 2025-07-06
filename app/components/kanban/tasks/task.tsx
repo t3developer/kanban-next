@@ -1,4 +1,4 @@
-  'use client';
+'use client';
 import { useState } from "react";
 import KanbanTaskCard from "./task-card";
 import { Dialog, VisuallyHidden } from "radix-ui";
@@ -16,7 +16,7 @@ export interface KanbanTaskProps {
   isOverlay?: boolean;
 }
 
-const KanbanTask = (props: KanbanTaskProps) => {
+const KanbanTask = React.memo(function KanbanTask(props: KanbanTaskProps) {
   const [ openModal, setOpenModal ] = useState<boolean>(false);
   const { task: { id: taskId } } = props;
   const [updateTask, removeTask] = useKanbanStore(
@@ -59,6 +59,6 @@ const KanbanTask = (props: KanbanTaskProps) => {
     </Dialog.Root>
     </div>
   );
-};
+});
 
 export default KanbanTask;

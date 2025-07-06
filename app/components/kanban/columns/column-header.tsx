@@ -1,5 +1,4 @@
 'use client';
-
 import { useKanbanStore } from "@/lib/stores/kanban/store";
 import classnames from "classnames";
 import { KanbanColumnProps } from "./column";
@@ -26,9 +25,9 @@ const KanbanColumnHeader = (props: KanbanColumnProps) => {
     <div
       className={classnames(
         "flex items-center justify-between gap-2",
-        "p-3 rounded-md bg-white border-1 border-gray-200 shadow-md shadow-gray-300/50 border-t-3",
+        "p-3 rounded-md bg-white shadow-md shadow-gray-300/50 border-t-3",
         { "border-t-lime-500": type === BASIC_COLUMNS.COMPLETED },
-        { "border-t-cyan-500": type !== BASIC_COLUMNS.COMPLETED },
+        { "border-gray-300": type !== BASIC_COLUMNS.COMPLETED },
         
       )}
     >

@@ -13,6 +13,8 @@ export default function KanbanInitializer() {
   }, []);
 
   useEffect(() => {
+    // we want to wait for the store intialization and the local storage sync up
+    // even after that columns are empty we give them the default values
     if (hasHydrated && columns.length === 0) {
       setColumns((state) => {
         state.columns = defaultColumns;
