@@ -29,9 +29,9 @@ const KanbanTaskAdd = ({ columns, addTask }: KanbanTaskAddProps) => {
     <>
       <AlertDialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
         <AlertDialog.Trigger asChild>
-          <div className="inline-flex items-center cursor-pointer gap-1 mt-2 ml-2 text-sm text-gray-400 hover:text-gray-500">
-            <div><FiPlus /></div>
-            <div className='uppercase'>New Task</div>
+          <div className="kanban-button flex justify-between items-center gap-2">
+            <span className='font-extrabold text-lg'><FiPlus /></span>
+            <span>New Task</span>
           </div>
         </AlertDialog.Trigger>
         <AlertDialog.Portal>

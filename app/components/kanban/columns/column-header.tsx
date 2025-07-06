@@ -25,7 +25,7 @@ const KanbanColumnHeader = (props: KanbanColumnProps) => {
   return (
     <div
       className={classnames(
-        "flex items-center justify-between gap-6",
+        "flex items-center justify-between gap-2",
         "p-3 rounded-md bg-white border-1 border-gray-200 shadow-md shadow-gray-300/50 border-t-3",
         { "border-t-lime-500": type === BASIC_COLUMNS.COMPLETED },
         { "border-t-cyan-500": type !== BASIC_COLUMNS.COMPLETED },
