@@ -35,3 +35,8 @@ body {
     @apply hover:ring-offset-1 hover:ring-1 hover:ring-blue-200 hover:ring-offset-blue-400
   }
 }
+
+.kanban-dragging,
+.kanban-dragging * {
+  cursor: grabbing !important;
+}

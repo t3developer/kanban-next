@@ -1,4 +1,4 @@
-'use client';
+  'use client';
 import { useState } from "react";
 import KanbanTaskCard from "./task-card";
 import { Dialog, VisuallyHidden } from "radix-ui";
@@ -6,6 +6,9 @@ import KanbanTaskUpdate from "./task-update";
 import { useKanbanStore } from "@/lib/stores/kanban/store";
 import { Task } from "@/lib/stores/kanban/types";
 import React from "react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { useShallow } from "zustand/shallow";
 
 export interface KanbanTaskProps {
   task: Task,
@@ -14,13 +17,28 @@ export interface KanbanTaskProps {
 }
 
 const KanbanTask = (props: KanbanTaskProps) => {
-  const { task: { id: taskId }, columnId, isOverlay } = props;
   const [ openModal, setOpenModal ] = useState<boolean>(false);
-  const updateTask = useKanbanStore(state => state.updateTask);
-  const removeTask = useKanbanStore(state => state.removeTask);
+  const { task: { id: taskId } } = props;
+  const [updateTask, removeTask] = useKanbanStore(
+    useShallow((state) => [state.updateTask, state.removeTask])
+  );
 
+  // --- DND-KIT ---
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: taskId,
+  });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+    zIndex: isDragging ? 100 : "auto",
+  };
+
+  // ... rest unchanged
   return (
-    <Dialog.Root open={openModal} onOpenChange={setOpenModal}>
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="inline-grid">
+      <Dialog.Root open={openModal} onOpenChange={setOpenModal}>
       <Dialog.Trigger>
         <KanbanTaskCard {...props} />
       </Dialog.Trigger>
@@ -39,16 +57,8 @@ const KanbanTask = (props: KanbanTaskProps) => {
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
+    </div>
   );
 };
 
 export default KanbanTask;
-
-// export default React.memo(KanbanTask, (prev, next) => {
-//   return (
-//     prev.task.id === next.task.id &&
-//     prev.task.updatedAt === next.task.updatedAt &&
-//     prev.task.status === next.task.status &&
-//     prev.columnId === next.columnId
-//   );
-// });

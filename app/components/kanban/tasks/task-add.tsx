@@ -1,20 +1,24 @@
 import { AlertDialog, Form } from 'radix-ui';
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useMemo, useState } from 'react'
 import { FiPlus } from 'react-icons/fi';
 
 interface KanbanTaskAddProps {
-  columnId: string,
+  columns: {id: string, label: string, type: string}[],
   addTask: (title: string, status: string, description?: string) => void
 }
 
-const KanbanTaskAdd = ({ columnId, addTask }: KanbanTaskAddProps) => {
+const KanbanTaskAdd = ({ columns, addTask }: KanbanTaskAddProps) => {
   const [ dialogOpen, setDialogOpen ] = useState<boolean>(false);
+  console.log('columns shortened data', columns);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    const column = columns.find(c => c.type === data.get('taskStatus') as string);
+    const columnId = column && column.id;
+
     addTask(
-      columnId,
+      columnId!,
       data.get('taskTitle') as string,
       data.get('taskDesc') as string
     );
@@ -57,6 +61,20 @@ const KanbanTaskAdd = ({ columnId, addTask }: KanbanTaskAddProps) => {
                 </div>
                 <Form.Control asChild>
                   <textarea rows={3} id="taskDesc" className="kanban-input mt-1" />
+                </Form.Control>
+              </Form.Field>
+
+              <Form.Field name="taskStatus" className="mt-3">
+                <div className="flex items-baseline justify-between">
+                  <Form.Label className="mt-1 text-sm">Status</Form.Label>
+                  <Form.Message match="valueMissing" className='text-sm text-red-400'>Please enter a task title</Form.Message>
+                </div>
+                <Form.Control asChild>
+                  <select id="taskStatus" name="taskStatus" required className='pr-2 w-1/2 mt-1 kanban-input'>
+                    {columns?.map(c => (
+                      <option key={c.id} id={c.id} value={c.type}>{c.label}</option>
+                    ))}
+                  </select>
                 </Form.Control>
               </Form.Field>
 
